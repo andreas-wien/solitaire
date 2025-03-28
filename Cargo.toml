@@ -1,0 +1,16 @@
+[package]
+name = "solitaire"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+name = "solitaire_lib"
+path = "src/lib.rs"
+
+[[bin]]
+name = "solitaire_bin"
+path = "src/main.rs"
+
+[dependencies]
+strum = "0.27.1"
+strum_macros = "0.27.1"
