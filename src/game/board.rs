@@ -109,17 +109,67 @@ impl Board {
         playable_cards
     }
     pub fn draw_command_line_gui(&self) {
+        let playing_card_back = '\u{1F0A0}';
+        let no_card = ' ';
         print!("{esc}[2J{esc}[1;1H", esc = 27 as char);
-        println!(" ---\t ---\t\t ---\t ---\t ---\t ---");
-        println!("| # |\t|   |\t\t|   |\t|   |\t|   |\t|   |");
-        println!("| # |\t|   |\t\t|   |\t|   |\t|   |\t|   |");
-        println!(" ---\t ---\t\t ---\t ---\t ---\t ---");
-        println!("  0\t  8\t\t  x\t  x\t  x\t  x");
+        // Print deck
+        if self.deck.cards.len() > 0 {
+            print!("{playing_card_back} ")
+        } else {
+            print!("{no_card}");
+        }
+        print!(" ");
 
-        println!(" ---\t ---\t ---\t ---\t ---\t ---\t ---");
-        println!("|   |\t|   |\t|   |\t|   |\t|   |\t|   |\t|   |");
-        println!("|   |\t|   |\t|   |\t|   |\t|   |\t|   |\t|   |");
-        println!(" ---\t ---\t ---\t ---\t ---\t ---\t ---");
-        println!("  1\t  2\t  3\t  4\t  5\t  6\t  7")
+        // Print zone for newly drawn cards from deck
+        // TODO: logic for drawing cards from deck
+        print!("    ");
+
+        // Print goal zones
+        for goal_area in &self.goal_area {
+            let sym = match goal_area.last() {
+                Some(card) => card.get_unicode_symbol(),
+                None => no_card,
+            };
+            print!("{} ", sym);
+        }
+        print!("\n");
+
+        // Print selectors for areas
+        println!("0   8       9   10  11  12\n");
+
+        let mut longest_play_area = 0;
+        for play_area in &self.play_area {
+            if play_area.len() > longest_play_area {
+                longest_play_area = play_area.len();
+            }
+        }
+
+        // Print play area
+        let mut n = 0;
+        while n != longest_play_area {
+            let mut i = 0;
+            for play_area in &self.play_area {
+                if i != 0 {
+                    print!("   ");
+                }
+                if play_area.len() == 0 || n > play_area.len() - 1 {
+                    print!("{no_card}");
+                } else {
+                    let sym = if play_area[n].get_is_hidden() == false {
+                        play_area[n].get_unicode_symbol()
+                    } else {
+                        playing_card_back
+                    };
+                    print!("{sym}");
+                }
+                i += 1;
+            }
+            print!("\n");
+            n += 1;
+        }
+
+        // Print selectors for areas
+        println!("1   2   3   4   5   6   7\n");
+
     }
 }

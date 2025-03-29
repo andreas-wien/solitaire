@@ -58,6 +58,71 @@ impl Card {
         self.color
     }
 
+    pub fn get_unicode_symbol(&self) -> char {
+        match self.get_suit() {
+            CardSuits::Spades => match self.get_rank() {
+                CardRanks::Ace => '\u{1F0A1}',   // 🂡
+                CardRanks::Two => '\u{1F0A2}',   // 🂢
+                CardRanks::Three => '\u{1F0A3}', // 🂣
+                CardRanks::Four => '\u{1F0A4}',  // 🂤
+                CardRanks::Five => '\u{1F0A5}',  // 🂥
+                CardRanks::Six => '\u{1F0A6}',   // 🂦
+                CardRanks::Seven => '\u{1F0A7}', // 🂧
+                CardRanks::Eight => '\u{1F0A8}', // 🂨
+                CardRanks::Nine => '\u{1F0A9}',  // 🂩
+                CardRanks::Ten => '\u{1F0AA}',   // 🂪
+                CardRanks::Jack => '\u{1F0AB}',  // 🂫
+                CardRanks::Queen => '\u{1F0AD}', // 🂭
+                CardRanks::King => '\u{1F0AE}',  // 🂮
+            },
+            CardSuits::Hearts => match self.get_rank() {
+                CardRanks::Ace => '\u{1F0B1}',   // 🂱
+                CardRanks::Two => '\u{1F0B2}',   // 🂲
+                CardRanks::Three => '\u{1F0B3}', // 🂳
+                CardRanks::Four => '\u{1F0B4}',  // 🂴
+                CardRanks::Five => '\u{1F0B5}',  // 🂵
+                CardRanks::Six => '\u{1F0B6}',   // 🂶
+                CardRanks::Seven => '\u{1F0B7}', // 🂷
+                CardRanks::Eight => '\u{1F0B8}', // 🂸
+                CardRanks::Nine => '\u{1F0B9}',  // 🂹
+                CardRanks::Ten => '\u{1F0BA}',   // 🂺
+                CardRanks::Jack => '\u{1F0BB}',  // 🂻
+                CardRanks::Queen => '\u{1F0BD}', // 🂽
+                CardRanks::King => '\u{1F0BE}',  // 🂾
+            },
+            CardSuits::Diamonds => match self.get_rank() {
+                CardRanks::Ace => '\u{1F0C1}',   // 🃁
+                CardRanks::Two => '\u{1F0C2}',   // 🃂
+                CardRanks::Three => '\u{1F0C3}', // 🃃
+                CardRanks::Four => '\u{1F0C4}',  // 🃄
+                CardRanks::Five => '\u{1F0C5}',  // 🃅
+                CardRanks::Six => '\u{1F0C6}',   // 🃆
+                CardRanks::Seven => '\u{1F0C7}', // 🃇
+                CardRanks::Eight => '\u{1F0C8}', // 🃈
+                CardRanks::Nine => '\u{1F0C9}',  // 🃉
+                CardRanks::Ten => '\u{1F0CA}',   // 🃊
+                CardRanks::Jack => '\u{1F0CB}',  // 🃋
+                CardRanks::Queen => '\u{1F0CD}', // 🃍
+                CardRanks::King => '\u{1F0CE}',  // 🃎
+            },
+            CardSuits::Clubs => match self.get_rank() {
+                CardRanks::Ace => '\u{1F0D1}',   // 🃑
+                CardRanks::Two => '\u{1F0D2}',   // 🃒
+                CardRanks::Three => '\u{1F0D3}', // 🃓
+                CardRanks::Four => '\u{1F0D4}',  // 🃔
+                CardRanks::Five => '\u{1F0D5}',  // 🃕
+                CardRanks::Six => '\u{1F0D6}',   // 🃖
+                CardRanks::Seven => '\u{1F0D7}', // 🃗
+                CardRanks::Eight => '\u{1F0D8}', // 🃘
+                CardRanks::Nine => '\u{1F0D9}',  // 🃙
+                CardRanks::Ten => '\u{1F0DA}',   // 🃚
+                CardRanks::Jack => '\u{1F0DB}',  // 🃛
+                CardRanks::Queen => '\u{1F0DD}', // 🃝
+                CardRanks::King => '\u{1F0DE}',  // 🃞
+            },
+        }
+    }
+
     pub fn reveal(&mut self) {
         self.is_hidden = false;
     }
