@@ -42,6 +42,20 @@ impl Board {
         board
     }
 
+    pub fn get_stack(&self, area_selector: u8) -> Result<&Vec<Card>, String> {
+        if area_selector > 0 && area_selector < 8 {
+            Ok(&self.play_area[area_selector as usize - 1])
+        } else if area_selector > 7 && area_selector < 13 {
+            Ok(&self.goal_area[area_selector as usize - 1])
+        } else {
+            Err(String::from("No area with that index"))
+        }
+    }
+
+    pub fn get_first_card_on_stack<'a>(&self, stack: &'a Vec<Card>) -> &'a Card {
+        stack.last().unwrap()
+    }
+
     pub fn add_card_to_play_area(
         &mut self,
         play_area_index: usize,
@@ -170,6 +184,5 @@ impl Board {
 
         // Print selectors for areas
         println!("1   2   3   4   5   6   7\n");
-
     }
 }
